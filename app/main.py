@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from base64 import b64encode
 
@@ -33,3 +34,6 @@ html_1 = f"""
 @app.get("/test")
 async def test():
     return HTMLResponse(html_1)
+
+app.mount('/static', StaticFiles(directory="/code"), name="static")
+
