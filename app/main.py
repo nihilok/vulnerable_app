@@ -21,10 +21,20 @@ html_1 = f"""
 <html>
 <body>
 <h1>Hello!</h1>
-<input id="password-reminder" type=password>
+<div id="box"></div>
+<form onsubmit=handleSubmit()>
+
+    <input id="password-reminder" type=password>
+
+</form>
 <script>
     var pw = decodeURIComponent(atob("{base_64}"))
     window.onload = function () {"{"}document.getElementById('password-reminder').value = pw{"}"}
+    
+    var box = document.querySelectorAll("box")[0]
+    function handleSubmit() {"{"}
+    console.log("submitting")
+    {"}"}
 </script>
 </body>
 </html>
