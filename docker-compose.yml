@@ -6,19 +6,29 @@ services:
       dockerfile: ./docker/app/Dockerfile
     ports:
       - "8080:80"
-#  db:
-#    build:
-#      context: ./
-#      dockerfile: postgres/Dockerfile
-#    volumes:
-#      - postgres_data:/var/lib/postgres/data
-#    ports:
-#      - "5432:5432"
+    depends_on:
+      - "db"
+  db:
+    build:
+      context: ./
+      dockerfile: ./docker/postgres/Dockerfile
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
+      PGUSER: docker
+    ports:
+      - "5432:5432"
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
 #  nginx:
 #    build:
 #      context: ./
 #      dockerfile: ./nginx/Dockerfile
 #    ports:
 #      - "80:80"
-volumes:
-  postgres_data:

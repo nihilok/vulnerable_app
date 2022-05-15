@@ -22,18 +22,21 @@ html_1 = f"""
 <body>
 <h1>Hello!</h1>
 <div id="box"></div>
-<form onsubmit=handleSubmit()>
+<form onsubmit="handleSubmit(); return false;">
 
     <input id="password-reminder" type=password>
 
 </form>
 <script>
-    var pw = decodeURIComponent(atob("{base_64}"))
-    window.onload = function () {"{"}document.getElementById('password-reminder').value = pw{"}"}
-    
     var box = document.querySelectorAll("box")[0]
     function handleSubmit() {"{"}
-    console.log("submitting")
+    var val = document.getElementById('password-reminder')
+    var box = document.getElementById('box')
+    box.innerHTML += `<br>${"{"}val.value{"}"} is not the password`;
+    val.value = null;
+    {"}"}
+    function showPass () {"{"}
+     alert("password")
     {"}"}
 </script>
 </body>

@@ -1,2 +1,2 @@
 FROM postgres:latest
-COPY postgres/data /var/lib/postgresql/data
+COPY docker/postgres/data /var/lib/postgresql/data
